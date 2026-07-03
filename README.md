@@ -114,10 +114,10 @@ Example:
 
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/foodease
-spring.datasource.username=root
-spring.datasource.password=your_password
+spring.datasource.username=<your_mysql_username>
+spring.datasource.password=<your_mysql_password>
 ```
-
+Note: Update the database credentials in backend/src/main/resources/application.properties according to your local MySQL configuration before running the application.
 ---
 
 ## Authentication
