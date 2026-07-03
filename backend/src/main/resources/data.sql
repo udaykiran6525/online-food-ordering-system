@@ -1,13 +1,13 @@
 INSERT INTO users (id, name, email, password, role, phone, address, city, state, pincode, active, created_at)
-VALUES (1, 'Admin User', 'admin@foodease.com', '$2a$10$wY.uG7yI/mFwz6Gj/hJ23OW.M76Qj22Yq023U/0V27W/F7Y30C8J6', 'ADMIN', '9876543210', 'Admin HQ, Tech Park', 'Hyderabad', 'Telangana', '500081',true, NOW())
+VALUES (1, 'Admin User', 'admin@foodease.com', '$2a$10$wY.uG7yI/mFwz6Gj/hJ23OW.M76Qj22Yq023U/0V27W/F7Y30C8J6', 'ADMIN', '9876543210', 'Admin HQ, Tech Park', 'Hyderabad', 'Telangana', '500081', true, NOW())
 ON DUPLICATE KEY UPDATE name='Admin User';
 
 INSERT INTO users (id, name, email, password, role, phone, address, city, state, pincode, active, created_at)
-VALUES (2, 'John Doe', 'customer@foodease.com', '$2a$10$7sQ3Zt44lZc7X.H.P8/OvewL2.w6Q3xX/Q7c37q2W0O.29W7W6HwS', 'CUSTOMER', '9123456789', '123 Main St, Jubilee Hills', 'Hyderabad', 'Telangana', '500033',true, NOW())
+VALUES (2, 'John Doe', 'customer@foodease.com', '$2a$10$7sQ3Zt44lZc7X.H.P8/OvewL2.w6Q3xX/Q7c37q2W0O.29W7W6HwS', 'CUSTOMER', '9123456789', '123 Main St, Jubilee Hills', 'Hyderabad', 'Telangana', '500033', true, NOW())
 ON DUPLICATE KEY UPDATE name='John Doe';
 
 INSERT INTO users (id, name, email, password, role, phone, address, city, state, pincode, active, created_at)
-VALUES (3, 'Jane Smith', 'restaurant@foodease.com', '$2a$10$7sQ3Zt44lZc7X.H.P8/OvewL2.w6Q3xX/Q7c37q2W0O.29W7W6HwS', 'ADMIN', '9988776655', '456 Market St, Banjara Hills', 'Hyderabad', 'Telangana', '500034',true, NOW())
+VALUES (3, 'Jane Smith', 'restaurant@foodease.com', '$2a$10$7sQ3Zt44lZc7X.H.P8/OvewL2.w6Q3xX/Q7c37q2W0O.29W7W6HwS', 'ADMIN', '9988776655', '456 Market St, Banjara Hills', 'Hyderabad', 'Telangana', '500034', true, NOW())
 ON DUPLICATE KEY UPDATE name='Jane Smith';
 
 INSERT INTO categories (id, name, description, image_url)
@@ -21,7 +21,7 @@ VALUES
 (7, 'Indian Desserts & Beverages', 'Sweet treats and traditional refreshing beverages', 'https://res.cloudinary.com/degvfsiys/image/upload/f_auto,q_auto/1000547222_ydb4p1')
 ON DUPLICATE KEY UPDATE name=VALUES(name), description=VALUES(description), image_url=VALUES(image_url);
 
-INSERT INTO restaurants (id, name, description, address, phone, image_url, rating, is_active, business_timing, gst_number, owner_id, created_at)
+INSERT INTO restaurants (id, name, description, address, phone, image_url, rating, active, business_timing, gst_number, owner_id, created_at)
 VALUES 
 (1, 'FoodEase Royal Kitchen', 'Authentic Indian Cuisines & Delicacies', 'Plot 42, Foodie Street, Madhapur, Hyderabad', '9876543210', 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4', 4.8, true, '10:00 AM - 11:30 PM', '29ABCDE1234F1Z5', 1, NOW())
 ON DUPLICATE KEY UPDATE name=VALUES(name), address=VALUES(address), business_timing=VALUES(business_timing), gst_number=VALUES(gst_number);
