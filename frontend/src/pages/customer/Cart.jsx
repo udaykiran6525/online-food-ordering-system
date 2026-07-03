@@ -11,7 +11,7 @@ export default function Cart() {
     return <div className="spinner-container"><div className="spinner"></div></div>;
   }
 
-  if (!cart || cart.items.length === 0) {
+  if (!cart || !Array.isArray(cat.items) || cart.items.length === 0) {
     return (
       <div className="animate-fade-in text-center" style={{ paddingTop: '10vh' }}>
         <div style={{ fontSize: '6rem', marginBottom: '20px', opacity: 0.8 }}>🛒</div>
