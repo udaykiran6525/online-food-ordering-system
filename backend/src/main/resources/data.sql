@@ -72,4 +72,4 @@ VALUES
 (38, 'Mango Lassi', 'Traditional thick churned mango lassi yogurt drink blended with ripe sweet Alphonso mango pulp', 129.00, 'https://res.cloudinary.com/degvfsiys/image/upload/f_auto,q_auto/1000547220_mur630', true, true, '10 mins', 4.8, 290, 1, 7, NOW()),
 (39, 'Masala Chai', 'Authentic Indian masala tea brewed freshly with crushed ginger, cardamom cloves, and rich milk', 69.00, 'https://res.cloudinary.com/degvfsiys/image/upload/f_auto,q_auto/1000547219_clkfxk', true, true, '10 mins', 4.9, 600, 1, 7, NOW()),
 (40, 'Kesar Pista Kulfi', 'Traditional dense Indian frozen dairy dessert flavored with saffron and pistachios', 139.00, 'https://res.cloudinary.com/degvfsiys/image/upload/f_auto,q_auto/1000547218_m0ua7d', true, true, '10 mins', 4.8, 220, 1, 7, NOW())
-ON DUPLICATE KEY UPDATE name=VALUES(name), price=VALUES(price), description=VALUES(description), image_url=VALUES(image_url), vegetarian=VALUES(vegetarian);
+ON DUPLICATE KEY UPDATE name=VALUES(name), price=VALUES(price), description=VALUES(description), image_url=VALUES(image_url), vegetarian=VALUES(vegetarian); 
