@@ -43,7 +43,7 @@ export const CartProvider = ({ children }) => {
     setCart(data);
     return data;
   };
-
+  const updateQuantity = async (cartItemId, quantity) => {
   const res = await axiosInstance.put(`/cart/update/${cartItemId}?quantity=${quantity}`);
 
   const data = res.data || {};
