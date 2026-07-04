@@ -17,7 +17,7 @@ export default function BrowseFood() {
   const fetchCategories = async () => {
     try {
       const res = await categoryApi.getAll();
-      setCategories(res.data);
+      setCategories(Array.isArray(res.data)? res.data: []);
     } catch (err) {
       console.error('Failed to fetch categories');
     }
@@ -49,7 +49,7 @@ export default function BrowseFood() {
     setLoading(true);
     try {
       const res = await foodApi.search(searchTerm, { size: 50 });
-      setFoods(res.data.content || []);
+      setFoods(Array.isArray(res.data?.content) ? res.data.content: []);
       setSelectedCategory(null);
     } catch (err) {
       console.error('Search failed');
@@ -88,7 +88,7 @@ export default function BrowseFood() {
         >
           All Foods
         </button>
-        {categories.map(cat => (
+        {Array.isArray(categories) && categories.map(cat => (
           <button 
             key={cat.id}
             className={`btn ${selectedCategory === cat.id ? 'btn-primary' : 'btn-secondary'} btn-sm`}
