@@ -14,7 +14,11 @@ export const CartProvider = ({ children }) => {
     try {
       setLoading(true);
       const res = await axiosInstance.get('/cart');
-      setCart(res.data);
+
+      const data = res.data || {};
+      data.items = Array.isArray(data.items) ? data.items : [];
+
+      setCart(data);
     } catch (err) {
       console.error('Failed to fetch cart', err);
     } finally {
@@ -32,20 +36,31 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = async (foodItemId, quantity = 1) => {
     const res = await axiosInstance.post('/cart/add', { foodItemId, quantity });
-    setCart(res.data);
-    return res.data;
+
+    const data = res.data || {};
+    data.items = Array.isArray(data.items) ? data.items : [];
+
+    setCart(data);
+    return data;
   };
 
-  const updateQuantity = async (cartItemId, quantity) => {
-    const res = await axiosInstance.put(`/cart/update/${cartItemId}?quantity=${quantity}`);
-    setCart(res.data);
-    return res.data;
+  const res = await axiosInstance.put(`/cart/update/${cartItemId}?quantity=${quantity}`);
+
+  const data = res.data || {};
+  data.items = Array.isArray(data.items) ? data.items : [];
+
+  setCart(data);
+  return data;
   };
 
   const removeItem = async (cartItemId) => {
-    const res = await axiosInstance.delete(`/cart/remove/${cartItemId}`);
-    setCart(res.data);
-    return res.data;
+   const res = await axiosInstance.delete(`/cart/remove/${cartItemId}`);
+
+   const data = res.data || {};
+   data.items = Array.isArray(data.items) ? data.items : [];
+
+   setCart(data);
+   return data;
   };
 
   const cartCount = cart?.itemCount || 0;
