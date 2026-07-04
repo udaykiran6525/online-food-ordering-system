@@ -15,11 +15,21 @@ export const WishlistProvider = ({ children }) => {
     try {
       setLoading(true);
       const [listRes, idsRes] = await Promise.all([
-        wishlistApi.getWishlist(),
-        wishlistApi.getWishlistIds()
+       wishlistApi.getWishlist(),
+       wishlistApi.getWishlistIds()
       ]);
-      setWishlist(listRes.data || []);
-      setWishlistIds(idsRes.data || []);
+
+      setWishlist(
+       Array.isArray(listRes.data)
+        ? listRes.data
+        : listRes.data?.content || []
+      );
+
+      setWishlistIds(
+       Array.isArray(idsRes.data)
+        ? idsRes.data
+        : []
+      );
     } catch (err) {
       console.error('Failed to fetch wishlist', err);
     } finally {
@@ -50,8 +60,11 @@ export const WishlistProvider = ({ children }) => {
       setWishlist(prev => prev.filter(item => item.id !== foodId));
       try {
         const res = await wishlistApi.remove(foodId);
-        setWishlist(res.data || []);
-        setWishlistIds((res.data || []).map(f => f.id));
+        const data = Array.isArray(res.data)
+        ? res.data
+        : res.data?.content || [];
+        setWishlist(data);
+        setWishlistIds(data.map(f => f.id));
       } catch (err) {
         console.error('Failed to remove from wishlist', err);
         fetchWishlist();
@@ -61,8 +74,11 @@ export const WishlistProvider = ({ children }) => {
       setWishlist(prev => [...prev, food]);
       try {
         const res = await wishlistApi.add(foodId);
-        setWishlist(res.data || []);
-        setWishlistIds((res.data || []).map(f => f.id));
+        const data = Array.isArray(res.data)
+        ? res.data
+        : res.data?.content || [];
+         setWishlist(data);
+        setWishlistIds(data.map(f => f.id));
       } catch (err) {
         console.error('Failed to add to wishlist', err);
         fetchWishlist();
