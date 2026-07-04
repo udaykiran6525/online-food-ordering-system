@@ -36,7 +36,8 @@ axiosInstance.interceptors.response.use(
 
     if (isNetworkOrProxyError) {
       console.warn('[Demo Mode] Backend unreachable or error. Falling back to local data.');
-      return mockService.handleRequest(error.config);
+
+      return Promise.reject(error);
     }
 
     if (status === 401 && !error.config?.url?.includes('/auth/login')) {
@@ -44,6 +45,7 @@ axiosInstance.interceptors.response.use(
       localStorage.removeItem('foodease_user');
       window.location.href = '/login';
     }
+
     return Promise.reject(error);
   }
 );
