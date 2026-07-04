@@ -43,7 +43,11 @@ export default function MenuManagement() {
     try {
       const rid = user?.restaurantId || 1;
       const res = await categoryApi.getByRestaurant(rid);
-      setCategories(res.data?.content || res.data || []);
+      setCategories(
+        Array.isArray(res.data)
+        ? res.data
+        : res.data?.content || []
+      );
     } catch (err) {
       toast.error('Failed to load categories');
     }
@@ -54,7 +58,11 @@ export default function MenuManagement() {
     try {
       const rid = user?.restaurantId || 1;
       const res = await foodApi.getByRestaurant(rid);
-      setFoods(res.data?.content || res.data || []);
+      setFoods(
+       Array.isArray(res.data)
+       ? res.data
+       : res.data?.content || []
+      );
     } catch (err) {
       toast.error('Failed to load menu items');
     } finally {
@@ -115,7 +123,8 @@ export default function MenuManagement() {
       }
     }
   };
-
+  const safeFoods = Array.isArray(foods) ? foods : [];
+  const safeCategories = Array.isArray(categories) ? categories : [];
   if (loading) return <div className="spinner-container"><div className="spinner"></div></div>;
 
   return (
@@ -141,10 +150,10 @@ export default function MenuManagement() {
             </tr>
           </thead>
           <tbody>
-            {foods.length === 0 ? (
+            {safeFoods.length === 0 ? (
               <tr><td colSpan="6" style={{ textAlign: 'center', padding: '30px' }}>No food items found</td></tr>
             ) : (
-              foods.map(food => (
+              safeFoods.map(food => (
                 <tr key={food.id}>
                   <td>
                     <img 
@@ -206,7 +215,7 @@ export default function MenuManagement() {
                   <label className="form-label">Category</label>
                   <select className="form-input" value={form.categoryId} onChange={e => setForm({...form, categoryId: e.target.value})} required style={{ background: 'var(--bg-input)' }}>
                     <option value="">Select Category</option>
-                    {categories.map(c => <option key={c.id} value={c.id} style={{ color: 'black' }}>{c.name}</option>)}
+                    {safeCategories.map(c => <option key={c.id} value={c.id} style={{ color: 'black' }}>{c.name}</option>)}
                   </select>
                 </div>
                 <div className="form-group">
