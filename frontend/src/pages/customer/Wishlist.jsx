@@ -3,7 +3,7 @@ import FoodCard from '../../components/FoodCard';
 import { useNavigate } from 'react-router-dom';
 
 export default function Wishlist() {
-  const { wishlist, loading } = useWishlist();
+  const { wishlist = [], loading } = useWishlist();
   const navigate = useNavigate();
 
   return (
@@ -21,7 +21,7 @@ export default function Wishlist() {
 
       {loading ? (
         <div className="spinner-container"><div className="spinner"></div></div>
-      ) : wishlist.length === 0 ? (
+      ) :!Array.isArray(wishlist) || wishlist.length === 0 ? (
         <div className="card text-center" style={{ padding: '80px 20px', background: 'var(--bg-card)', border: '1px solid var(--glass-border)', borderRadius: '20px' }}>
           <div style={{ fontSize: '4.5rem', marginBottom: '16px', animation: 'float 3s ease-in-out infinite' }}>🤍</div>
           <h3 style={{ fontSize: '1.4rem', fontWeight: 700, margin: '0 0 8px 0' }}>Your Wishlist is Empty</h3>
@@ -38,7 +38,7 @@ export default function Wishlist() {
         </div>
       ) : (
         <div className="food-grid">
-          {wishlist.map(food => (
+          {Array.isArray(wishlist) && wishlist.map(food => (
             <FoodCard key={food.id} food={food} />
           ))}
         </div>
