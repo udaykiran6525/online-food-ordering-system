@@ -18,34 +18,53 @@ public class CategoryController {
 
     private final CategoryService categoryService;
 
+    // GET ALL
     @GetMapping
     public ResponseEntity<List<Category>> getAllCategories() {
         return ResponseEntity.ok(categoryService.getAllCategories());
     }
 
+    // GET BY RESTAURANT
     @GetMapping("/restaurant/{restaurantId}")
     public ResponseEntity<List<Category>> getCategoriesByRestaurant(@PathVariable Long restaurantId) {
         return ResponseEntity.ok(categoryService.getCategoriesByRestaurant(restaurantId));
     }
 
+    // CREATE
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Category> createCategory(@RequestBody Map<String, Object> body) {
+
         String name = (String) body.get("name");
         String imageUrl = (String) body.get("imageUrl");
         String description = (String) body.get("description");
-        Long restaurantId = body.get("restaurantId") != null ? Long.valueOf(body.get("restaurantId").toString()) : null;
-        return ResponseEntity.ok(categoryService.createCategory(name, imageUrl, description, restaurantId));
+
+        Long restaurantId = body.get("restaurantId") != null
+                ? Long.valueOf(body.get("restaurantId").toString())
+                : null;
+
+        return ResponseEntity.ok(
+                categoryService.createCategory(name, imageUrl, description, restaurantId)
+        );
     }
 
+    // UPDATE
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Category> updateCategory(@PathVariable Long id,
-                                                    @RequestBody Map<String, String> body) {
-        return ResponseEntity.ok(categoryService.updateCategory(id, body.get("name"),
-                body.get("imageUrl"), body.get("description")));
+                                                   @RequestBody Map<String, String> body) {
+
+        return ResponseEntity.ok(
+                categoryService.updateCategory(
+                        id,
+                        body.get("name"),
+                        body.get("imageUrl"),
+                        body.get("description")
+                )
+        );
     }
 
+    // DELETE
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
