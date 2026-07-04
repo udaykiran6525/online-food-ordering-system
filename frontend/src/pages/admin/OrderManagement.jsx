@@ -35,8 +35,16 @@ export default function OrderManagement() {
       const res = await orderApi.getRestaurantOrders(rid);
       setOrders(res.data?.content || res.data || []);
     } catch (err) {
-      toast.error('Failed to load orders');
-    } finally {
+       console.error("Order API Error:", err);
+       console.error("Response:", err.response);
+       console.error("Response Data:", err.response?.data);
+
+       toast.error(
+        err.response?.data?.message ||
+        err.response?.data?.error ||
+        "Failed to load orders"
+       );
+} finally {
       setLoading(false);
     }
   };
@@ -54,7 +62,15 @@ export default function OrderManagement() {
       toast.success('Order status updated');
       fetchOrders();
     } catch (err) {
-      toast.error('Failed to update status');
+       console.error("Update Status Error:", err);
+       console.error("Response:", err.response);
+       console.error("Response Data:", err.response?.data);
+
+       toast.error(
+        err.response?.data?.message ||
+        err.response?.data?.error ||
+        "Failed to update status"
+      );
     }
   };
 
