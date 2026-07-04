@@ -19,7 +19,11 @@ export default function CategoryManagement() {
     if (!user?.restaurantId) return;
     try {
       const res = await categoryApi.getByRestaurant(user.restaurantId);
-      setCategories(res.data);
+      setCategories(
+       Array.isArray(res.data)
+       ? res.data
+       : res.data?.content || []
+     );
     } catch (err) {
       toast.error('Failed to load categories');
     } finally {
@@ -69,7 +73,7 @@ export default function CategoryManagement() {
       }
     }
   };
-
+  const safeCategories = Array.isArray(categories) ? categories : [];
   if (loading) return <div className="spinner-container"><div className="spinner"></div></div>;
 
   return (
@@ -93,10 +97,10 @@ export default function CategoryManagement() {
             </tr>
           </thead>
           <tbody>
-            {categories.length === 0 ? (
+            {safeCategories.length === 0 ? (
               <tr><td colSpan="4" style={{ textAlign: 'center', padding: '30px' }}>No categories found</td></tr>
             ) : (
-              categories.map(cat => (
+              safeCategories.map(cat => (
                 <tr key={cat.id}>
                   <td>#{cat.id}</td>
                   <td style={{ fontWeight: 600 }}>{cat.name}</td>
