@@ -16,7 +16,12 @@ export default function Orders() {
   const fetchOrders = async () => {
     try {
       const res = await orderApi.getMyOrders();
-      setOrders(res.data);
+
+      setOrders(
+        Array.isArray(res.data)
+        ? res.data
+        : res.data?.content || []
+      );
     } catch (err) {
       toast.error('Failed to load orders');
     } finally {
@@ -42,7 +47,7 @@ export default function Orders() {
         </div>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-          {orders.map(order => (
+          {Array.isArray(orders) && orders.map(order => (
             <div key={order.id} className="card" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--glass-border)', paddingBottom: '16px' }}>
                 <div>
@@ -65,7 +70,7 @@ export default function Orders() {
               </div>
 
               <div style={{ display: 'flex', gap: '16px', overflowX: 'auto', paddingBottom: '8px' }}>
-                {order.orderItems.map(item => (
+                {Array.isArray(order.orderItems) && order.orderItems.map(item => (
                   <div key={item.id} style={{ display: 'flex', alignItems: 'center', gap: '12px', background: 'var(--bg-input)', padding: '8px 12px', borderRadius: '8px', minWidth: 'max-content' }}>
                     <div style={{ fontWeight: 600 }}>{item.quantity} ×</div>
                     <div>{item.foodItemName}</div>
