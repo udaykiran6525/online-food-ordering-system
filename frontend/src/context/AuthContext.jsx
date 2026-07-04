@@ -9,15 +9,18 @@ export const AuthProvider = ({ children }) => {
 
   const normalizeUser = (data) => {
     if (!data) return null;
+
     const u = data.user || data;
     const role = u.role === 'RESTAURANT_OWNER' ? 'ADMIN' : u.role;
+
     return {
       token: data.token || localStorage.getItem('foodease_token'),
       id: u.userId || u.id,
       name: u.name,
       email: u.email,
       role: role,
-      restaurantId: u.restaurantId || data.restaurantId || (role === 'ADMIN' ? 1 : null),
+      restaurantId: u.restaurantId ?? data.restaurantId ?? null,
+
       address: u.address || '123 Main St'
     };
   };
@@ -25,16 +28,20 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const storedUser = localStorage.getItem('foodease_user');
     const token = localStorage.getItem('foodease_token');
+
     if (storedUser && token) {
       setUser(normalizeUser(JSON.parse(storedUser)));
     }
+
     setLoading(false);
   }, []);
 
   const login = useCallback((authData) => {
     const normalized = normalizeUser(authData);
+
     localStorage.setItem('foodease_token', normalized.token);
     localStorage.setItem('foodease_user', JSON.stringify(normalized));
+
     setUser(normalized);
   }, []);
 
@@ -48,7 +55,16 @@ export const AuthProvider = ({ children }) => {
   const isAdmin = () => user?.role === 'ADMIN';
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading, isCustomer, isAdmin }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        login,
+        logout,
+        loading,
+        isCustomer,
+        isAdmin
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
@@ -56,6 +72,10 @@ export const AuthProvider = ({ children }) => {
 
 export const useAuth = () => {
   const ctx = useContext(AuthContext);
-  if (!ctx) throw new Error('useAuth must be used within AuthProvider');
+
+  if (!ctx) {
+    throw new Error('useAuth must be used within AuthProvider');
+  }
+
   return ctx;
 };
