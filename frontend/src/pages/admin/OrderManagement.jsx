@@ -103,7 +103,7 @@ export default function OrderManagement() {
             onClick={() => setFilter(status)}
             style={{ borderRadius: '20px' }}
           >
-            {getStatusLabel(status)} ({safeorders.filter(o => o.status === status).length})
+            {getStatusLabel(status)} ({safeOrders.filter(o => o.status === status).length})
           </button>
         ))}
       </div>
