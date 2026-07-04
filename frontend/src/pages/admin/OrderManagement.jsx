@@ -94,7 +94,7 @@ export default function OrderManagement() {
           onClick={() => setFilter('ALL')}
           style={{ borderRadius: '20px' }}
         >
-          All Orders ({orders.length})
+          All Orders ({safeOrders.length})
         </button>
         {['PENDING', 'PREPARING', 'OUT_FOR_DELIVERY'].map(status => (
           <button 
@@ -103,7 +103,7 @@ export default function OrderManagement() {
             onClick={() => setFilter(status)}
             style={{ borderRadius: '20px' }}
           >
-            {getStatusLabel(status)} ({orders.filter(o => o.status === status).length})
+            {getStatusLabel(status)} ({safeorders.filter(o => o.status === status).length})
           </button>
         ))}
       </div>
