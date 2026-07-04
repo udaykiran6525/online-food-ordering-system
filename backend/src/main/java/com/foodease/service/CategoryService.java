@@ -24,25 +24,27 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
-    // GET BY RESTAURANT
+    // GET BY RESTAURANT 
     public List<Category> getCategoriesByRestaurant(Long restaurantId) {
-        return categoryRepository.findByRestaurantId(restaurantId);
+        return categoryRepository.findByRestaurant_Id(restaurantId);
     }
 
-    // CREATE CATEGORY
+    // CREATE CATEGORY 
     public Category createCategory(String name, String imageUrl, String description, Long restaurantId) {
+
+        Restaurant restaurant = null;
+
+        if (restaurantId != null) {
+            restaurant = restaurantRepository.findById(restaurantId)
+                    .orElseThrow(() -> new ResourceNotFoundException("Restaurant", restaurantId));
+        }
 
         Category category = Category.builder()
                 .name(name)
                 .imageUrl(imageUrl)
                 .description(description)
+                .restaurant(restaurant)
                 .build();
-
-        if (restaurantId != null) {
-            Restaurant restaurant = restaurantRepository.findById(restaurantId)
-                    .orElseThrow(() -> new ResourceNotFoundException("Restaurant", restaurantId));
-            category.setRestaurant(restaurant);
-        }
 
         return categoryRepository.save(category);
     }
