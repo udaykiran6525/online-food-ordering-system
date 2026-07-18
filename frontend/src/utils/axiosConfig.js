@@ -1,11 +1,13 @@
 import axios from 'axios';
 import { mockService } from '../services/mockService';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
+const API_BASE_URL = 'https://foodease-backend-hf09.onrender.com/api';
 
 const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
-  headers: { 'Content-Type': 'application/json' },
+  headers: {
+    'Content-Type': 'application/json',
+  },
   timeout: 15000,
 });
 
@@ -24,7 +26,7 @@ axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
     const status = error.response?.status;
-    const isNetworkOrProxyError = 
+    const isNetworkOrProxyError =
       error.code === 'ERR_NETWORK' ||
       error.code === 'ECONNABORTED' ||
       !error.response ||
@@ -44,6 +46,7 @@ axiosInstance.interceptors.response.use(
       localStorage.removeItem('foodease_user');
       window.location.href = '/login';
     }
+
     return Promise.reject(error);
   }
 );
