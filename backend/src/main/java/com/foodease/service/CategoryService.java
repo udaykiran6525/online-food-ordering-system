@@ -26,7 +26,7 @@ public class CategoryService {
 
     // GET BY RESTAURANT 
     public List<Category> getCategoriesByRestaurant(Long restaurantId) {
-        return categoryRepository.findByRestaurant_Id(restaurantId);
+        return categoryRepository.findByRestaurantId(restaurantId);
     }
 
     // CREATE CATEGORY 
@@ -72,3 +72,4 @@ public class CategoryService {
         categoryRepository.deleteById(id);
     }
 }
+
