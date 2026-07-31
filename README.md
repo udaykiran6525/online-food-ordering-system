@@ -1,9 +1,13 @@
-# FoodEase - Online Food Ordering System
-FoodEase is a modern Full Stack Online Food Ordering System designed to provide a seamless experience for customers and restaurant administrators. The application allows users to browse food items, manage carts, place orders, and track order status, while administrators can efficiently manage menus, customers, and orders through a dedicated dashboard.
+# 🍽️ FoodEase - Online Food Ordering System
 
-## Features
+FoodEase is a modern Full Stack Online Food Ordering System developed to provide a seamless experience for customers and restaurant administrators. The application allows customers to browse food items, add items to their cart, place orders, and track their order status, while restaurant administrators can efficiently manage menus, categories, customers, and orders through a dedicated dashboard.
 
-### Customer Module
+---
+
+# ✨ Features
+
+## 👤 Customer Module
+
 - User Registration & Login
 - Secure JWT Authentication
 - Browse Food Menu
@@ -13,23 +17,26 @@ FoodEase is a modern Full Stack Online Food Ordering System designed to provide 
 - Checkout & Order Placement
 - Order History
 - Profile Management
-- Real-time Order Status Updates
-- Responsive Dashboard
+- Responsive User Interface
 
-### Restaurant Admin Module
+## 🏪 Restaurant Admin Module
+
 - Secure Admin Login
 - Dashboard Overview
 - Menu Management
 - Category Management
 - Order Management
 - Customer Management
+- Restaurant Profile Management
 - Revenue Analytics
-- Profile Management
 - Real-time Notifications
 
-## Tech Stack
+---
 
-### Frontend
+# 💻 Tech Stack
+
+## Frontend
+
 - React.js
 - HTML5
 - CSS3
@@ -37,62 +44,95 @@ FoodEase is a modern Full Stack Online Food Ordering System designed to provide 
 - Axios
 - React Router
 
-### Backend
+## Backend
+
 - Spring Boot
 - Spring Security
 - JWT Authentication
 - REST API
 - WebSocket
-
-### Database
-- MySQL
-
-### Tools
 - Maven
-- Git
-- GitHub
+
+## Database
+
+- Aiven Cloud MySQL
+
+## Cloud & Deployment
+
+- Vercel (Frontend Hosting)
+- Render (Backend Hosting)
+- Cloudinary (Image Storage)
+- GitHub (Version Control)
+
+## Development Tools
+
 - IntelliJ IDEA
 - Visual Studio Code
 - Postman
+- Git
+- GitHub
 
 ---
 
-## 📂 Project Structure
+# 📂 Project Structure
 
-```
+```text
 FoodEase/
 │
 ├── frontend/
-│   ├── src/
 │   ├── public/
-│   └── package.json
+│   ├── src/
+│   │   ├── assets/
+│   │   ├── components/
+│   │   ├── context/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   ├── package.json
+│   └── vite.config.js
 │
 ├── backend/
 │   ├── src/
-│   ├── pom.xml
-│   └── application.properties
+│   │   └── main/
+│   │       ├── java/
+│   │       │   ├── controller/
+│   │       │   ├── service/
+│   │       │   ├── repository/
+│   │       │   ├── entity/
+│   │       │   ├── dto/
+│   │       │   ├── config/
+│   │       │   └── security/
+│   │       │
+│   │       └── resources/
+│   │           ├── application.properties
+│   │           ├── schema.sql
+│   │           └── data.sql
+│   │
+│   └── pom.xml
 │
 └── README.md
 ```
 
 ---
 
-## Installation
+# 🚀 Installation
 
-### Clone Repository
+## Clone Repository
 
 ```bash
 git clone https://github.com/your-username/foodease.git
 ```
 
-### Backend
+## Backend
 
 ```bash
 cd backend
+mvn clean install
 mvn spring-boot:run
 ```
 
-### Frontend
+## Frontend
 
 ```bash
 cd frontend
@@ -102,58 +142,86 @@ npm run dev
 
 ---
 
-## Database Configuration
+# 🗄️ Database Configuration
 
-Update the database configuration in:
+This project uses **Aiven Cloud MySQL** as the production database.
 
-```
+Database configuration is available in:
+
+```text
 backend/src/main/resources/application.properties
 ```
 
-Example:
+Database schema:
 
-```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/foodease
-spring.datasource.username=<your_mysql_username>
-spring.datasource.password=<your_mysql_password>
+```text
+backend/src/main/resources/schema.sql
 ```
-Note: Update the database credentials in backend/src/main/resources/application.properties according to your local MySQL configuration before running the application.
+
+Sample data:
+
+```text
+backend/src/main/resources/data.sql
+```
+
 ---
 
-## Authentication
+# 🔐 Authentication
 
 - JWT Token Based Authentication
-- Password Encryption
+- Password Encryption (BCrypt)
 - Role-Based Authorization
-- Protected APIs
+- Protected REST APIs
+- Secure Login & Registration
 
-## Main Modules
+---
+
+# 📦 Main Modules
 
 - Landing Page
 - Customer Dashboard
-- Restaurant Admin Dashboard
+- Restaurant Dashboard
+- Food Categories
 - Food Menu
 - Shopping Cart
 - Wishlist
 - Checkout
 - Orders
-- Notifications
 - Profile Management
 
-## Future Enhancements
+---
+
+# ☁️ Deployment
+
+| Service | Platform |
+|----------|----------|
+| Frontend | Vercel |
+| Backend | Render |
+| Database | Aiven Cloud MySQL |
+| Image Storage | Cloudinary |
+| Source Code | GitHub |
+
+---
+
+# 🔮 Future Enhancements
 
 - Online Payment Gateway
 - Email Notifications
 - SMS Notifications
-- Delivery Tracking
-- Coupon System
-- AI-Based Food Recommendations
+- Live Delivery Tracking
+- Coupon & Offers System
+- AI-Based Food Recommendation
 - Mobile Application
+- Review & Rating System
 
-## Developed By
-K.Uday Kiran
-Bachelor of Technology (B.Tech)
-Artificial Intelligence & Data Science (AI&DS)
+---
 
-## License
-This project is developed for educational and learning purposes.
+# 👨‍💻 Author
+
+**KOTAPATI UDAY KIRAN**
+
+---
+
+# 📄 License
+
+This project is developed for educational, internship, and learning purposes.
